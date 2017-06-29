@@ -1,7 +1,9 @@
 <template>
   <div>
-    <button @click="saveNote">저장하기</button>
-    <button @click="removeNote" v-if="key">삭제하기</button>
+    <div class="toolbar">
+      <button @click="saveNote">저장하기</button>
+      <button @click="removeNote" v-if="key">삭제하기</button>
+    </div>
 
     <input class="title" type="text" v-model="title" placeholder="제목을 입력하세요">
     <div v-html="currentNote.body" ref="body" contentEditable></div>
@@ -61,7 +63,14 @@ export default {
     padding: 15px;
     margin-bottom: 30px;
   }
-  .body {
-   resize: none 
+  .toolbar {
+    margin-bottom: 38px;
+
+    button {
+      border: 0;
+      background: #dddddd;
+      padding: 6px 10px;
+      border-radius: 5px;
+    }
   }
 </style>

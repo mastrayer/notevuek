@@ -22,7 +22,7 @@ export default {
 div {
   padding: 10px;
   
-  &:not(:first-child) { border-top: 1px solid #e3e3e3 }
+  &:nth-child(n+3) { border-top: 1px solid #e3e3e3 }
 
   > .title {
     color: #737373;

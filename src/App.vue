@@ -4,7 +4,7 @@
       <div class="toolbar">
         <button @click="newNote">새 노트</button>
       </div>
-      <list v-for="note in notes" :key="note" :note="note"></list>
+      <list v-for="note in notes" :key="note" :note="note" :class="{active: (currentNote['.key'] == note['.key'])}"></list>
     </div>
     <div class="content">
       <note />
@@ -13,13 +13,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import list from './components/list'
 import note from './components/note'
 
 export default {
   name: 'app',
-  computed: mapGetters(['notes']),
+  computed: {
+    ...mapGetters(['notes']),
+    ...mapState(['currentNote'])
+  },
   components: {
     list: list,
     note: note
@@ -49,6 +52,23 @@ export default {
         overflow: auto;
         width: 300px;
         border-right: 1px solid #e3e3e3;
+
+        .toolbar {
+          text-align: right;
+          margin-bottom: 30px;
+          
+          button {
+            border: 0;
+            background: #dddddd;
+            padding: 6px 10px;
+            border-radius: 5px;
+          }
+        }
+       
+        .active {
+          box-sizing:border-box;
+          border: 2px solid #0c0c0c; 
+        }
       }
     
       &.content {

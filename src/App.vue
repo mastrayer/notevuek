@@ -66,8 +66,7 @@ export default {
         }
        
         .active {
-          box-sizing:border-box;
-          border: 2px solid #0c0c0c; 
+          background: #e3ffea;
         }
       }
     

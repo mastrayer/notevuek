@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="note">
     <div class="toolbar">
       <button @click="saveNote">저장하기</button>
       <button @click="removeNote" v-if="key">삭제하기</button>
     </div>
 
     <input class="title" type="text" v-model="title" placeholder="제목을 입력하세요">
-    <div v-html="currentNote.body" ref="body" contentEditable></div>
+    <div class="body" v-html="currentNote.body" ref="body" contentEditable></div>
   </div>
 </template>
 
@@ -53,16 +53,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .title {
-    width: 100%;
-    box-sizing: border-box;
-    border: 0;
-    border-bottom: 1px solid #e3e3e3;
-    font-size: 30px;
-    outline: 0;
-    padding: 15px;
-    margin-bottom: 30px;
-  }
+.note {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+
   .toolbar {
     margin-bottom: 38px;
 
@@ -73,4 +68,23 @@ export default {
       border-radius: 5px;
     }
   }
+
+  .title {
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    border-bottom: 1px solid #e3e3e3;
+    font-size: 30px;
+    outline: 0;
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+
+  .body {
+    outline: 0;
+    padding: 15px;
+    height: 100%;
+    overflow: auto;
+  }
+}
 </style>

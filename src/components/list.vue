@@ -21,8 +21,15 @@ export default {
 <style lang="scss" scoped>
 div {
   padding: 10px;
+  transition: background 0.2s ease-in;
   
-  &:nth-child(n+3) { border-top: 1px solid #e3e3e3 }
+  &.active {
+    background: #e3ffea;
+  } 
+  
+  &:nth-child(n+3) { 
+    border-top: 1px solid #e3e3e3;
+  }
 
   > .title {
     color: #737373;
@@ -42,6 +49,9 @@ div {
     color: #939393;
     font-size: 13px;
     font-weight: 300;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 }
 </style>

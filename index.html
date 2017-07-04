@@ -4,9 +4,15 @@
     <meta charset="utf-8">
     <title>notevuek</title>
     <link rel="stylesheet" type="text/css" href="/static/reset.css"></link>
+    <style>
+      #app { height: 100%; }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <router-view></router-view>
+    </div>
+
     <!-- built files will be auto injected -->
   </body>
 </html>

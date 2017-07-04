@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="container">
     <div class="list">
       <div class="toolbar">
         <button @click="newNote">새 노트</button>
@@ -20,26 +20,32 @@ import note from './components/note'
 export default {
   name: 'app',
   computed: {
-    ...mapGetters(['notes']),
-    ...mapState(['currentNote'])
+    ...mapGetters(['notes']), /* vuex를 생성할 때 정의한 getter를 컴포넌트에서 좀 더 간편하게 참조할 수 있도록 해주는 헬퍼 함수를 호출합니다 */
+    ...mapState(['currentNote']), /* vuex를 생성할 때 정의한 state를 컴포넌트에서 좀 더 간편하게 참조할 수 있도록 해주는 헬퍼 함수를 호출합니다 */
   },
   components: {
     list: list,
     note: note
   },
   created() {
-    this.$store.dispatch("setNotesReference")
+    this.$store.dispatch("setNotesReference") /* firebase database의 notes를 참조하도록 설정합니다 */
+    
+    /* currentNote의 값 변경을 감지하여 uri를 변경합니다 */
+    this.$store.watch((state) => state.currentNote, function(newVal, oldVal) { 
+      this.$router.push({params: {key: newVal['.key']}})
+    }.bind(this))
   },
   methods: {
+    /* 새 노트를 만들기 위해 store의 updateNote mutation을 호출합니다 */
     newNote() {
-      this.$store.commit("newNote")
-    }, 
-  },
+      this.$store.commit("updateNote", {})
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-  #app {
+  .container {
     height: 100%;
 
     > div {
@@ -58,16 +64,13 @@ export default {
           margin-bottom: 30px;
           
           button {
-            border: 0;
             background: #dddddd;
             padding: 6px 10px;
+            border:0;
             border-radius: 5px;
           }
         }
        
-        .active {
-          background: #e3ffea;
-        }
       }
     
       &.content {

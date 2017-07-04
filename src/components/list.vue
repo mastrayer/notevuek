@@ -11,6 +11,7 @@ export default {
   name: 'list',
   props: ['note'],
   methods: {
+    /* 해당 노트의 key를 이용해 store의 selectNote action을 호출합니다 */
     selectNote(key) {
       this.$store.commit("selectNote", key)
     }
